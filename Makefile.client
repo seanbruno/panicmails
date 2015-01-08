@@ -1,0 +1,20 @@
+PORTNAME=	panicmails-client
+PORTVERSION=	0.2
+CATEGORIES=	sysutils
+
+RUN_DEPENDS=	panicmail:${PORTSDIR}/sysutils/panicmail
+
+DISTFILES=
+NO_BUILD=	yes
+NO_INSTALL=	yes
+NOFETCHFILES=	yes
+
+PLIST_FILES=	/usr/local/etc/panicmail.pub
+
+WRKSRC=		${PWD}
+
+do-install:
+	${INSTALL_SCRIPT} ${WRKSRC}/panicmail.pub ${STAGEDIR}${PREFIX}/etc/
+	${INSTALL_SCRIPT} ${WRKSRC}/rc.conf.panicmail ${STAGEDIR}${PREFIX}/etc/
+
+.include <bsd.port.mk>

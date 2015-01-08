@@ -1,0 +1,9 @@
+poll imap.gmail.com protocol IMAP
+   user "EMAILADDRESS" is root here
+   password 'EMAILPASSWORD'
+   folder 'INBOX'
+   fetchlimit 1
+   keep
+   ssl
+   sslcertfile /usr/local/share/certs/ca-root-nss.crt
+   mda '/usr/local/bin/procmail /usr/local/etc/panicprocmail.rc -f %F -d %T';

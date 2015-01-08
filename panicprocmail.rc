@@ -1,0 +1,20 @@
+# ensure /bin/sh for processing
+SHELL=/bin/sh
+
+# Set on when debugging
+VERBOSE=yes
+
+# The log of procmail actions
+LOGFILE=/var/log/panicmail
+
+INBOX=/var/panicmail
+
+# Catch-all rule for all unmatched email
+# Set EMAILADDRESS to the desintation inbox
+:0:
+* ^(From|Cc|To).*EMAILADDRESS
+* ^Subject:.*Kernel Panic
+$INBOX
+
+:0
+/dev/null

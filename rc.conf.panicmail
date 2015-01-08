@@ -1,0 +1,8 @@
+panicmail_enable="YES"
+panicmail_autosubmit="YES"
+panicmail_sendto="EMAILADDRESS"
+panicmail_key="/usr/local/etc/panicmail.pub"
+
+# requires nginx and php-fpm
+nginx_enable="YES"
+php_fpm_enable="YES"

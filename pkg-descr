@@ -1,0 +1,2 @@
+LLNW specific bits to parse panicmails sent from CDN and other FreeBSD nodes
+into something that looks useable by a human being.

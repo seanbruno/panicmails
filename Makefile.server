@@ -1,0 +1,37 @@
+PORTNAME=	panicmails-server
+PORTVERSION=	0.2
+CATEGORIES=	sysutils
+
+RUN_DEPENDS=	nginx:${PORTSDIR}/www/nginx \
+		pkesh:${PORTSDIR}/security/pkesh
+
+USE_PHP=	yes
+
+DISTFILES=
+NO_BUILD=	yes
+NO_INSTALL=	yes
+NOFETCHFILES=	yes
+
+PLIST_FILES=	/usr/local/etc/panicmail.key \
+		"@(,,0600) /usr/local/etc/panicfetchmail.rc" \
+		/usr/local/etc/panicprocmail.rc \
+		/usr/local/www/panics/panics.php \
+		/usr/local/www/panics/dec.sh \
+		/usr/local/etc/rc.conf.panicmail
+
+PLIST_DIRS=	/usr/local/www/panics/ \
+		/var/panicmail
+
+WRKSRC=		${PWD}
+
+do-install:
+	${INSTALL} -m600 ${WRKSRC}/panicfetchmail.rc ${STAGEDIR}${PREFIX}/etc/
+	${INSTALL_DATA} ${WRKSRC}/panicprocmail.rc ${STAGEDIR}${PREFIX}/etc/
+	${INSTALL_DATA} ${WRKSRC}/panicmail.key ${STAGEDIR}${PREFIX}/etc/
+	${INSTALL_DATA} ${WRKSRC}/rc.conf.panicmail ${STAGEDIR}${PREFIX}/etc/
+	${MKDIR} -p ${STAGEDIR}${PREFIX}/www/panics
+	${INSTALL_DATA} ${WRKSRC}/panics.php ${STAGEDIR}${PREFIX}/www/panics/
+	${INSTALL_SCRIPT} ${WRKSRC}/dec.sh ${STAGEDIR}${PREFIX}/www/panics/
+	${MKDIR} -p ${STAGEDIR}/var/panicmail
+
+.include <bsd.port.mk>
